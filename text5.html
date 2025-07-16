@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charles & Desire Wedding Invitation</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      position: relative;
+      color: #fff;
+      text-align: center;
+      padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('./hiIMAG/ring2.jpeg') no-repeat center center fixed; /* Replace with your image path */
+      background-size: cover;
+      filter: blur(6px) brightness(0.6);
+      z-index: -1;
+    }
+
+    .overlay {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+      border-radius: 15px;
+      max-width: 600px;
+      width: 100%;
+      margin: auto;
+      border: 2px solid #d8bfd8;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #e6e6fa;
+    }
+
+    .details {
+      font-size: 1.1rem;
+      margin: 1rem 0;
+      line-height: 1.6;
+    }
+
+    .theme {
+      margin-top: 1rem;
+      font-style: italic;
+      color: #e6e6fa;
+    }
+
+    .countdown {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #dda0dd;
+    }
+
+    .buttons {
+      margin-top: 2rem;
+    }
+
+    .buttons button {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      margin: 0.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .yes-btn {
+      background-color: #9370DB;
+      color: white;
+    }
+
+    .no-btn {
+      background-color: #D3D3D3;
+      color: #333;
+    }
+
+    .message {
+      margin-top: 2rem;
+      font-size: 1.1rem;
+      display: none;
+    }
+
+    a {
+      color: #dda0dd;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .details,
+      .countdown,
+      .theme,
+      .message {
+        font-size: 1rem;
+      }
+
+      .buttons button {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="overlay">
+    <h1>You're Invited!</h1>
+    <p class="details">
+      Together, let's commemorate the special bond between <strong>Charles & Desire</strong><br />
+      on <strong>Saturday, 30th August 2025</strong><br /><br />
+      <strong>Kingdom Hall:</strong> 11:00 AM<br />
+      13 Ezinifite Street, Omagba Phase 2<br /><br />
+      <strong>Reception:</strong> 1:00 PM<br />
+      3, Lady Dr. Ngozi Agbasimalo Road, 33 Onitsha (DollyHills Hotel)
+    </p>
+
+    <p class="theme">
+      Dress code: Formal Attire<br />
+      Theme: DC Love Journey — Lilac, Ivory, Purple & Silver
+    </p>
+
+    <div class="countdown" id="countdown">Loading countdown...</div>
+
+    <div class="buttons">
+      <button class="yes-btn" onclick="showYes()">Yes, I’ll attend</button>
+      <button class="no-btn" onclick="showNo()">No, I can't make it</button>
+    </div>
+
+    <div class="message" id="response"></div>
+  </div>
+
+  <script>
+    // Countdown
+    const countdown = () => {
+      const eventDate = new Date("2025-08-30T11:00:00");
+      const now = new Date();
+      const diff = eventDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerText = "Today is the big day!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+      document.getElementById("countdown").innerText =
+        `${days} days, ${hours} hrs, ${minutes} mins to go!`;
+    };
+    setInterval(countdown, 1000);
+    countdown();
+
+    // RSVP Buttons
+    function showYes() {
+      const message = document.getElementById('response');
+      message.style.display = 'block';
+      message.innerHTML = `
+        <p>🎉 We're thrilled you'll be attending!</p>
+        <p>
+          📩 Please confirm your attendance via the RSVP form:<br>
+          <a href="https://forms.gle/YoBdnR2ipvctzWgf6" target="_blank">
+            Submit RSVP via Google Form
+          </a>
+        </p>
+        <p>
+          📍 Ceremony Location:<br>
+          <a href="https://maps.google.com/?q=13+Ezinifite+street+omagba+phase+2" target="_blank">
+            View Kingdom Hall on Google Maps
+          </a>
+        </p>
+        <p>
+          🎉 Reception Venue:<br>
+          <a href="https://maps.google.com/?q=3+Lady+Dr+Ngozi+Agbasimalo+Road+33+Onitsha" target="_blank">
+            View Reception at DollyHills Hotel on Google Maps
+          </a>
+        </p>
+      `;
+    }
+
+    function showNo() {
+      const message = document.getElementById('response');
+      message.style.display = 'block';
+      message.innerHTML = `
+        <p>Thank you for letting us know. We'll truly miss your presence on our special day. 💜</p>
+      `;
+    }
+  </script>
+</body>
+
+</html>
